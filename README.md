@@ -23,10 +23,10 @@ A Telegram bot that uses an unofficial Truecaller API to look up phone number in
 ### Deno Deploy
 
 1. [Fork](/../../fork) this repo on GitHub.
-2. Create a [new Deno Deploy](https://docs.deno.com/deploy/getting_started/) project from the forked repo.
+2. Create a [new Deno Deploy](https://docs.deno.com/deploy/getting_started/) App from the forked repo.
 3. Add the `TG_THIS_BOT_TOKEN` and other Environment Variables from [.env.example](.env.example) file. You can skip adding the optional envs as they aren't critical to the service.
-4. After a successful deployment, copy the production url from Deno console.
-5. Edit the following link replacing the `<...>` parts with your data and visit it.
+4. After a successful deployment, add a Deno KV Database to the App.
+5. Copy the production url from Deno console and edit the following link replacing the `<...>` parts with your data and visit it from a browser.
 
    ```plaintext
    https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook?url=<YOUR_DENO_DEPLOY_URL>&allowed_updates=%5B%22message%22%5D
