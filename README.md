@@ -10,7 +10,8 @@ A Telegram bot that uses an unofficial Truecaller API to look up phone number in
 ### Setup Telegram Bot
 
 1. Create a new bot using [@BotFather](https://t.me/BotFather).
-2. Set the bot commands:
+2. Copy the bot token, it will be needed during deploy and setting the webhook later.
+3. Set the bot commands:
 
    ```plaintext
    login - Login to Truecaller
@@ -19,18 +20,26 @@ A Telegram bot that uses an unofficial Truecaller API to look up phone number in
    info - Information about the bot & installation_id
    ```
 
-3. [Set the webhook URL](https://core.telegram.org/bots/api#setwebhook) after deploying the bot using the following procedure.
-
 ### Deno Deploy
 
 1. [Fork](/../../fork) this repo on GitHub.
-2. Create a [new Deno Deploy](https://dash.deno.com/new) project from the forked repo.
-3. Go to the project's `Settings` tab and add the Environment Variables from [.env.example](.env.example) file. You can skip adding the optional envs as they aren't critical to the service.
-4. Grab the deployment URL from the `Overview` tab and set the webhook mentioned in previous section.
+2. Create a [new Deno Deploy](https://docs.deno.com/deploy/getting_started/) project from the forked repo.
+3. Add the `TG_THIS_BOT_TOKEN` and other Environment Variables from [.env.example](.env.example) file. You can skip adding the optional envs as they aren't critical to the service.
+4. After a successful deployment, copy the production url from Deno console.
+5. Edit the following link replacing the `<...>` parts with your data and visit it.
+
+   ```plaintext
+   https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook?url=<YOUR_DENO_DEPLOY_URL>&allowed_updates=%5B%22message%22%5D
+   ```
+6. Verify if everything is set correctly.
+
+   ```plaintext
+   https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getWebhookInfo
+   ```
 
 ## Information
 
-**Author:** [Nissan Ahmed](https://anissan.com) ([@ni554n](https://twitter.com/ni554n))
+**Author:** Nissan Ahmed ([@ni554n](https://x.com/ni554n))
 
-**Donate:** [PayPal](https://paypal.me/ni554n)
+**Website:** [anissan.com](https://anissan.com)
 <img src="https://ping.anissan.com/?repo=truecallerjs_bot" width="0" height="0" align="right">
