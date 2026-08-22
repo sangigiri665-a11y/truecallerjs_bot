@@ -1,11 +1,23 @@
+
 import { Telegraf } from "telegraf";
 import * as truecallerjs from "truecallerjs";
+import http from "http";
 
 const token = process.env.TG_THIS_BOT_TOKEN;
 if (!token) {
   console.error("TG_THIS_BOT_TOKEN is missing!");
   process.exit(1);
 }
+
+// Render ke port check ko satisfy karne ke liye dummy server
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Bot is running!");
+});
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
 
 const bot = new Telegraf(token);
 
@@ -21,11 +33,9 @@ bot.on("text", async (ctx) => {
 
   try {
     ctx.reply("Searching...");
-    // Note: Truecaller search requires login installation id / cookies if not logged in.
-    // Ensure you have logged in or provided search parameters.
     const searchData = {
       phone: query,
-      countryCode: "IN" // Change as per your country if needed
+      countryCode: "IN"
     };
     
     const result = await truecallerjs.search(searchData);
@@ -36,4 +46,4 @@ bot.on("text", async (ctx) => {
 });
 
 bot.launch();
-console.log("Bot is running...");
+console.log("Telegram Bot is running...");
